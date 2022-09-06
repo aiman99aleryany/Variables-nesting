@@ -1,0 +1,48 @@
+// use varialbes and nesting only
+$color-primary: red;
+$color-secondary: blue;
+$color-tertiary: green;
+$regular-padding: 1rem;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+// didn't edit the html or added any classes, so we are using semantics and pseudo classes
+body {
+  div:first-child {
+    padding: $regular-padding;
+    border: 2px solid $color-primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    h1:first-child {
+      color: $color-tertiary;
+      text-decoration: 2px $color-secondary underline;
+    }
+
+    section:nth-of-type(1) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      article {
+        padding: $regular-padding;
+        border: 2px solid $color-tertiary;
+        text-align: center;
+      }
+
+      article:nth-child(odd) {
+        color: $color-secondary;
+      }
+
+      article:nth-child(even) {
+        color: $color-primary;
+      }
+    }
+  }
+}
