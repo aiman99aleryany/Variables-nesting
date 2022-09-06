@@ -1,0 +1,98 @@
+@use "sass:map";
+
+$nth-child: 1;
+$red-border: 2px solid red;
+$green-border: 2px solid green;
+$center: center;
+$flex-propreties: justify-content, align-items;
+$reset-font: 62.5%;
+$resets: (
+  padding: 0,
+  margin: 0,
+  box-sizing: border-box,
+);
+
+:root {
+  font-size: $reset-font;
+}
+
+* {
+  @each $key, $value in $resets {
+    #{$key}: $value;
+  }
+}
+
+@mixin flexbox() {
+  display: flex;
+}
+
+@mixin center-flexbox() {
+  @each $proprety in $flex-propreties {
+    #{$proprety}: center;
+  }
+}
+
+@mixin flexbox-column {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@mixin red-border() {
+  border: $red-border;
+}
+
+@mixin green-border() {
+  border: $green-border;
+}
+
+@mixin align-text() {
+  text-align: center;
+}
+
+@mixin padding-2() {
+  padding: 2rem;
+}
+
+body {
+  font-size: 16px;
+  div:nth-child(#{$nth-child}) {
+    @include padding-2();
+    @include flexbox();
+    @include flexbox-column();
+    @include center-flexbox();
+    @include red-border();
+
+    h1:nth-child(#{$nth-child}) {
+      color: green;
+      text-decoration: 2px underline blue;
+    }
+
+    section:nth-of-type(#{$nth-child}) {
+      @include flexbox();
+
+      article {
+        @include padding-2();
+        @include flexbox();
+        @include center-flexbox();
+        @include green-border();
+        @include align-text();
+
+        p {
+          color: blue;
+        }
+      }
+
+      // I have a question here, and if you could reply to it, I would be happy :) .. as you see below, I had to hard code the loop expression and specify the 4 number since we have 4 paragraphes, is there a way around this so I can just write a variable instead? I tried this method but it didn't work
+      // @for $index from 1 through #{article:last-child}
+      @for $index from 1 through 4 {
+        @if $index % 2 == 0 {
+          article:nth-child(#{$index}) {
+            p {
+              color: red;
+            }
+          }
+        }
+      }
+    }
+  }
+}
